@@ -1,0 +1,1 @@
+# managingmicrostrategy.github.io
