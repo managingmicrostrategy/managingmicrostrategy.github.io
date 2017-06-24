@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://managingmicrostrategy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://managingmicrostrategy.com/" rel="alternate" type="text/html" /><updated>2017-06-24T02:42:44+00:00</updated><id>https://managingmicrostrategy.com/</id><title type="html">Managing MicroStrategy</title><subtitle>Blog for Managing MicroStrategy Intelligently</subtitle><entry><title type="html">Introduction to the MicroStrategy SDK</title><link href="https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk/" rel="alternate" type="text/html" title="Introduction to the MicroStrategy SDK" /><published>2017-06-23T17:00:00+00:00</published><updated>2017-06-23T17:00:00+00:00</updated><id>https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk</id><content type="html" xml:base="https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk/">&lt;p&gt;In this blog, I’ll be covering some topics that use the MicroStrategy SDK. Before I jump into those topics, though, I want to write a post on the SDK itself.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-the-microstrategy-sdk&quot;&gt;What is the MicroStrategy SDK?&lt;/h2&gt;
+
+&lt;p&gt;The MicroStrategy SDK consists of tools and libraries which allow you to extend the current functionality of MicroStrategy. The SDK, for example, allows you to customize web or create your own components which interact with the MicroStrategy Intelligence Server.&lt;/p&gt;
+
+&lt;p&gt;This blog will be specifically covering the libraries which expose MicroStrategy functionality to the components we build thus allowing us to communicate with the MicroStrategy Intelligence Server. This opens up possibilities like creating monitoring by routinely pulling certain information out of the Intelligence Server or running batch processes not available in Command Manager. The SDK we’ll use is the Web SDK.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-are-the-different-sdks&quot;&gt;What are the different SDKs?&lt;/h2&gt;
+
+&lt;p&gt;As of MSTR 10.8, these are the ones available:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Web SDK&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mobile SDK&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Visualization SDK&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;REST API&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Data Connector SDK&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Office SDK&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Intelligence Server SDK&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Usher SDK&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;what-is-the-difference-between-them&quot;&gt;What is the difference between them?&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://community.microstrategy.com/s/topic/0TO44000000FliLGAS/sdk&quot;&gt;SDK section of the MicroStrategy Community&lt;/a&gt; can go into much more depth than I can but hopefully I can simplify it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Web SDK&lt;/strong&gt; - Offers high level abstractions of Intelligence Server objects (like Documents or Users) as well as components for maintaining a web application. MicroStrategy Web was built with this SDK and it is also used to extend or customize Web. I us it to build monitoring or construct custom batch processes. This SDK is Java-based and communicates with the Intelligence Server through the Intelligence Server’s XML API.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mobile SDK&lt;/strong&gt; - Used to customize the look or behavior of a mobile application. This SDK is necessary if you want to rebrand the MicroStrategy mobile application as well as perform other common customizations.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Visualization SDK&lt;/strong&gt; - Used to easily and quickly create D3 visualizations using MicroStrategy data.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;REST API&lt;/strong&gt; - This is pretty new, but it looks like you can fetch report data in a JSON format using this API.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Connector SDK&lt;/strong&gt; - Allows you to create a connector to a new web-based data source.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Office SDK&lt;/strong&gt; - Used to embed MicroStrategy reports/functionality into Microsoft Office products like Word or Excel.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Intelligence Server SDK&lt;/strong&gt; - This SDK exposes nearly all functionality of the Intelligence Server, from creating reports and documents, to running reports and documents, to administration of the projects and Intelligence Servers. This SDK is the most important and exhaustive but, due to its complexity as well as the Web SDK’s growing capabilities, it is becoming less necessary for many tasks. However there is a lot of core Intelligence Server functionality available through the use of this SDK that isn’t with any other SDK. MicroStrategy Developer, Object Manager, and others were built using this SDK. The Intelligence Server SDK allows you to create applications to interact with the Intelligence Server through the Server’s COM-based in-process APIs.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Usher SDK&lt;/strong&gt; - Gives access to the Usher APIs, both server- and client-side.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-is-the-web-sdk-used&quot;&gt;How is the Web SDK used?&lt;/h2&gt;
+
+&lt;p&gt;As I said before, I mainly use the Web SDK and so I will be using that for some of the posts on this blog. This doesn’t mean we will be customizing web, but rather we’ll be using the objects exposed from the Web SDK. For instance, a method to manipulate a user object is exposed through the WebUser interface. These Web SDK libraries (JARs) translate a high-level request, like to disable a user, to XML that is sent to the Intelligence Server through an active session.&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/images/SDK-Server.png&quot; alt=&quot;SDK communicating with Server&quot; /&gt; &lt;/center&gt;
+
+&lt;p&gt;The XML sent to and from the Intelligence Server is then translated into a state change in our application. For instance, the Intelligence Server signals that disabling the user was successful.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-do-i-get-started&quot;&gt;How do I get started?&lt;/h2&gt;
+
+&lt;p&gt;To make an application using these libraries, you have to include them in a Java project. I will get to that in a future blog post. Stay tuned!&lt;/p&gt;</content><author><name></name></author><category term="sdk" /><summary type="html">In this blog, I’ll be covering some topics that use the MicroStrategy SDK. Before I jump into those topics, though, I want to write a post on the SDK itself.</summary></entry><entry><title type="html">Welcome!</title><link href="https://managingmicrostrategy.com/Welcome/" rel="alternate" type="text/html" title="Welcome!" /><published>2017-06-19T00:00:00+00:00</published><updated>2017-06-19T00:00:00+00:00</updated><id>https://managingmicrostrategy.com/Welcome</id><content type="html" xml:base="https://managingmicrostrategy.com/Welcome/">&lt;p&gt;Welcome to Managing MicroStrategy! This blog was created to help others with navigating their MicroStrategy environment and to give them tools to manage it.&lt;/p&gt;
+
+&lt;p&gt;I’ve been a MicroStrategy consultant for 7+ years and in that time I’ve noticed a lack of information surrounding the management of the software. I wanted to make a dent in that with this blog and I hope you find it useful. I intend to post at least once per week and I welcome all questions and feedback in the comments. Stay tunes for some posts!&lt;/p&gt;
+
+&lt;p&gt;I’m in no way affilitated with MicroStrategy - I’m just a concerned individual.&lt;/p&gt;</content><author><name></name></author><summary type="html">Welcome to Managing MicroStrategy! This blog was created to help others with navigating their MicroStrategy environment and to give them tools to manage it.</summary></entry></feed>

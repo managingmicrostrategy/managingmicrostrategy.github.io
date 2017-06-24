@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to the MicroStrategy SDK – Managing MicroStrategy – Blog for Managing MicroStrategy Intelligently</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="In this blog, I’ll be covering some topics that use the MicroStrategy SDK. Before I jump into those topics, though, I want to write a post on the SDK itself.
+
+" />
+    <meta property="og:description" content="In this blog, I’ll be covering some topics that use the MicroStrategy SDK. Before I jump into those topics, though, I want to write a post on the SDK itself.
+
+" />
+    
+    <meta name="author" content="Managing MicroStrategy" />
+
+    
+    <meta property="og:title" content="Introduction to the MicroStrategy SDK" />
+    <meta property="twitter:title" content="Introduction to the MicroStrategy SDK" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Managing MicroStrategy - Blog for Managing MicroStrategy Intelligently" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <!-- <a href="/" class="site-avatar"><img src="" /></a> -->
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">Managing MicroStrategy</a></h1>
+            <p class="site-description">Blog for Managing MicroStrategy Intelligently</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Introduction to the MicroStrategy SDK</h1>
+  <div class="subheader">
+    June 23, 2017 |
+    
+      tags:
+      
+        <a href="/tag/sdk">sdk </a>
+      
+     
+  </div>
+
+  <div class="entry">
+    <p>In this blog, I’ll be covering some topics that use the MicroStrategy SDK. Before I jump into those topics, though, I want to write a post on the SDK itself.</p>
+
+<h2 id="what-is-the-microstrategy-sdk">What is the MicroStrategy SDK?</h2>
+
+<p>The MicroStrategy SDK consists of tools and libraries which allow you to extend the current functionality of MicroStrategy. The SDK, for example, allows you to customize web or create your own components which interact with the MicroStrategy Intelligence Server.</p>
+
+<p>This blog will be specifically covering the libraries which expose MicroStrategy functionality to the components we build thus allowing us to communicate with the MicroStrategy Intelligence Server. This opens up possibilities like creating monitoring by routinely pulling certain information out of the Intelligence Server or running batch processes not available in Command Manager. The SDK we’ll use is the Web SDK.</p>
+
+<h2 id="what-are-the-different-sdks">What are the different SDKs?</h2>
+
+<p>As of MSTR 10.8, these are the ones available:</p>
+
+<ul>
+  <li>
+    <p>Web SDK</p>
+  </li>
+  <li>
+    <p>Mobile SDK</p>
+  </li>
+  <li>
+    <p>Visualization SDK</p>
+  </li>
+  <li>
+    <p>REST API</p>
+  </li>
+  <li>
+    <p>Data Connector SDK</p>
+  </li>
+  <li>
+    <p>Office SDK</p>
+  </li>
+  <li>
+    <p>Intelligence Server SDK</p>
+  </li>
+  <li>
+    <p>Usher SDK</p>
+  </li>
+</ul>
+
+<h2 id="what-is-the-difference-between-them">What is the difference between them?</h2>
+
+<p>The <a href="https://community.microstrategy.com/s/topic/0TO44000000FliLGAS/sdk">SDK section of the MicroStrategy Community</a> can go into much more depth than I can but hopefully I can simplify it.</p>
+
+<p><strong>Web SDK</strong> - Offers high level abstractions of Intelligence Server objects (like Documents or Users) as well as components for maintaining a web application. MicroStrategy Web was built with this SDK and it is also used to extend or customize Web. I us it to build monitoring or construct custom batch processes. This SDK is Java-based and communicates with the Intelligence Server through the Intelligence Server’s XML API.</p>
+
+<p><strong>Mobile SDK</strong> - Used to customize the look or behavior of a mobile application. This SDK is necessary if you want to rebrand the MicroStrategy mobile application as well as perform other common customizations.</p>
+
+<p><strong>Visualization SDK</strong> - Used to easily and quickly create D3 visualizations using MicroStrategy data.</p>
+
+<p><strong>REST API</strong> - This is pretty new, but it looks like you can fetch report data in a JSON format using this API.</p>
+
+<p><strong>Data Connector SDK</strong> - Allows you to create a connector to a new web-based data source.</p>
+
+<p><strong>Office SDK</strong> - Used to embed MicroStrategy reports/functionality into Microsoft Office products like Word or Excel.</p>
+
+<p><strong>Intelligence Server SDK</strong> - This SDK exposes nearly all functionality of the Intelligence Server, from creating reports and documents, to running reports and documents, to administration of the projects and Intelligence Servers. This SDK is the most important and exhaustive but, due to its complexity as well as the Web SDK’s growing capabilities, it is becoming less necessary for many tasks. However there is a lot of core Intelligence Server functionality available through the use of this SDK that isn’t with any other SDK. MicroStrategy Developer, Object Manager, and others were built using this SDK. The Intelligence Server SDK allows you to create applications to interact with the Intelligence Server through the Server’s COM-based in-process APIs.</p>
+
+<p><strong>Usher SDK</strong> - Gives access to the Usher APIs, both server- and client-side.</p>
+
+<h2 id="how-is-the-web-sdk-used">How is the Web SDK used?</h2>
+
+<p>As I said before, I mainly use the Web SDK and so I will be using that for some of the posts on this blog. This doesn’t mean we will be customizing web, but rather we’ll be using the objects exposed from the Web SDK. For instance, a method to manipulate a user object is exposed through the WebUser interface. These Web SDK libraries (JARs) translate a high-level request, like to disable a user, to XML that is sent to the Intelligence Server through an active session.</p>
+<center><img src="/images/SDK-Server.png" alt="SDK communicating with Server" /> </center>
+
+<p>The XML sent to and from the Intelligence Server is then translated into a state change in our application. For instance, the Intelligence Server signals that disabling the user was successful.</p>
+
+<h2 id="how-do-i-get-started">How do I get started?</h2>
+
+<p>To make an application using these libraries, you have to include them in a Java project. I will get to that in a future blog post. Stay tuned!</p>
+
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'managingmicrostrategy';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:hello@managingmicrostrategy.com"><i class="svg-icon email"></i></a>
+
+
+
+
+
+
+
+<a href="https://www.twitter.com/ManagingMstr"><i class="svg-icon twitter"></i></a>
+
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-101176964-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/introduction-to-the-microstrategy-sdk/',
+		  'title': 'Introduction to the MicroStrategy SDK'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>
