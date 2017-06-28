@@ -1,4 +1,186 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://managingmicrostrategy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://managingmicrostrategy.com/" rel="alternate" type="text/html" /><updated>2017-06-28T07:57:38+00:00</updated><id>https://managingmicrostrategy.com/</id><title type="html">Managing MicroStrategy</title><subtitle>Blog for Managing MicroStrategy Intelligently</subtitle><entry><title type="html">Introduction to the MicroStrategy SDK</title><link href="https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk/" rel="alternate" type="text/html" title="Introduction to the MicroStrategy SDK" /><published>2017-06-23T17:00:00+00:00</published><updated>2017-06-23T17:00:00+00:00</updated><id>https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk</id><content type="html" xml:base="https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk/">&lt;p&gt;In this blog, I’ll be covering some topics that use the MicroStrategy SDK. Before I jump into those topics, though, I want to write a post on the SDK itself.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://managingmicrostrategy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://managingmicrostrategy.com/" rel="alternate" type="text/html" /><updated>2017-06-28T08:27:38+00:00</updated><id>https://managingmicrostrategy.com/</id><title type="html">Managing MicroStrategy</title><subtitle>Blog for Managing MicroStrategy Intelligently</subtitle><entry><title type="html">MicroStrategy Web SDK: Connecting to the Intelligence Server</title><link href="https://managingmicrostrategy.com/connecting-to-the-microstrategy-intelligence-server-with-the-web-sdk/" rel="alternate" type="text/html" title="MicroStrategy Web SDK: Connecting to the Intelligence Server" /><published>2017-06-28T07:00:00+00:00</published><updated>2017-06-28T07:00:00+00:00</updated><id>https://managingmicrostrategy.com/connecting-to-the-microstrategy-intelligence-server-with-the-web-sdk</id><content type="html" xml:base="https://managingmicrostrategy.com/connecting-to-the-microstrategy-intelligence-server-with-the-web-sdk/">&lt;p&gt;Connecting to the Intelligence Server is one of the easier and well-documented subjects surrounding the Web SDK. However, I don’t think other sources go into enough detail about the differences between authentication types and other options available. In a first post of many in this “MicroStrategy Web SDK” series, I go into what I think you should know when using sessions.&lt;/p&gt;
+
+&lt;h2 id=&quot;basic-authentication&quot;&gt;&lt;a href=&quot;#basic-authentication&quot;&gt;Basic Authentication&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The following example shows how to connect to the Intelligence Server with standard authentication:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;WebIServerSession&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;WebObjectsFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getWebIServerSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Required for standard authentication&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setServerName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;iserver-host&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Optional but will default to 34952&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setServerPort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;34952&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSessionID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Throws WebObjectsException&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The code above does not try to communicate with the Intelligence Server until you try and get the session ID.&lt;/p&gt;
+
+&lt;p&gt;You may have noticed that the above code does not connect to a project. In order to connect to a project, you must add the following line before you get the session ID.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setProjectName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;project&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;other-modes-of-authentication&quot;&gt;&lt;a href=&quot;#other-modes-of-authentication&quot;&gt;Other modes of authentication&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Different authentication modes must be set with&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAuthMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The auth mode given as a parameter is an int. You should use the &lt;a href=&quot;https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/webapi/EnumDSSXMLAuthModes.html&quot;&gt;EnumDSSXMLAuthModes enum&lt;/a&gt; in order to choose the correct one.&lt;/p&gt;
+
+&lt;h3 id=&quot;ldap-and-trusted&quot;&gt;LDAP and Trusted&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;LDAP&lt;/strong&gt; is simplest since all you have to do is add this line to the standard authentication example above&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAuthMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EnumDSSXMLAuthModes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DssXmlAuthLDAP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Trusted&lt;/strong&gt; authentication is slightly different. You don’t need to set a password, but you do need to set a trust token.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAuthMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EnumDSSXMLAuthModes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DssXmlAuthTrusted&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTrustToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trustToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;trust-tokens&quot;&gt;Trust Tokens&lt;/h3&gt;
+
+&lt;p&gt;Many have experience creating and deleting tokens in the MicroStrategy Web interface if they use a SSO provider. A trust token and a user are passed from the client (this could be Web or the application we’re building) to the Intelligence Server and the user is automatically trusted and logged in.&lt;/p&gt;
+
+&lt;p&gt;While typically you would use the Administrator account to generate the trust token, it can be done with other users. See &lt;a href=&quot;#permissions-needed&quot;&gt;Permissions Needed&lt;/a&gt; to set up a non-Administrator user for this.&lt;/p&gt;
+
+&lt;p&gt;To generate a trust token with the SDK, create a session using the administrator account or another user that has the necessary permissions. Then call generateNewTrustToken() using that session.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Throws WebObjectsException&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trustToken&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;generateNewTrustToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;identifier&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/web/objects/WebIServerSession.html#generateNewTrustToken(java.lang.String)&quot;&gt;documentation for this method&lt;/a&gt; says that the identifier is the web application name but you can pass whatever string you want (provided a token with that name does not already exist on that Intelligence Server).&lt;/p&gt;
+
+&lt;p&gt;Once you have that trust token string, you can use that to log in using Trusted Authentication.&lt;/p&gt;
+
+&lt;h2 id=&quot;session-options&quot;&gt;&lt;a href=&quot;#session-options&quot;&gt;Session options&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;session-flags&quot;&gt;Session Flags&lt;/h3&gt;
+
+&lt;p&gt;There are a few web session flags that can be set in order for the session to follow a certain behavior. These flags should be set before retrieving a session ID.&lt;/p&gt;
+
+&lt;p&gt;The most useful flag is &lt;strong&gt;DssXmlSessionBypassClustering&lt;/strong&gt;. If you are in a clustered environment, sessions created over the Web SDK are load balanced based off of the Intelligence Server’s load factor. The load factor is determined by how many users are connected to that server. The cluster will establish a connection with whichever Intelligence Server has the lowest load factor. This flag tells the Intelligence Server to ignore that load balancing.&lt;/p&gt;
+
+&lt;p&gt;Below is an example:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSessionFlags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EnumDssXmlSessionFlags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DssXmlSessionBypassClustering&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// If you are setting multiple flags, use bitwise or (|)&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFlags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;EnumDSSXMLSessionFlags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DssXmlSessionBypassClustering&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;EnumDSSXMLSessionFlags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DssXmlSessionCancelActiveJobsOnClose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSessionFlags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sessionFlags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// If the session ID has already been obtained, make sure to update the session&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updateSessionParameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Throws WebObjectsException&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The rest of the flags can be found &lt;a href=&quot;https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/webapi/EnumDSSXMLSessionFlags.html&quot;&gt;in the EnumDSSXMLSessionFlags API reference&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;application-type&quot;&gt;Application Type&lt;/h3&gt;
+
+&lt;p&gt;The application type is what you can use to differentiate your application from others. MicroStrategy products already use this when you connect using, say, Developer or Web. The easiest way to see this is by checking the User Connections monitor in Developer. Users connected through Developer will have “Developer” next to their session and Web users will have “Web”.&lt;/p&gt;
+
+&lt;p&gt;It’s good practice to set your application type so you can distinguish your sessions not only in the User Connections monitor but also when digging through the Enterprise Manager tables. Records in the IS_SESSION_STATS table have the Authentication Type so you can easily filter.&lt;/p&gt;
+
+&lt;p&gt;To set the application type, call the setApplicationType() on the session. Use the EnumDSSXMLApplicationType interface to get the correct int.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setApplicationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;EnumDSSXMLApplicationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DssXmlApplicationCustomApp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The rest of the application types can be found in the &lt;a href=&quot;https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/webapi/EnumDSSXMLApplicationType.html&quot;&gt;EnumDSSXMLApplicationType API reference&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;disconnecting&quot;&gt;&lt;a href=&quot;#disconnecting&quot;&gt;Disconnecting&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Disconnecting is fairly simple.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;closeSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Throws WebObjectsException&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Once the session has been closed, the session object can be reused however the session ID will be different. You just have to call getSessionID() again.&lt;/p&gt;
+
+&lt;h2 id=&quot;more-info&quot;&gt;&lt;a href=&quot;#more-info&quot;&gt;More Info&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;persistable&quot;&gt;Persistable&lt;/h3&gt;
+
+&lt;p&gt;Since WebIServerSession implements &lt;a href=&quot;https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/utils/serialization/Persistable.html&quot;&gt;Persistable&lt;/a&gt; (by way of WebSessionInfo), you can save the state of the session as a String.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionState&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;saveState&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Sessions can also easily be restored from state.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;restoreState&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sessionState&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// returns true is successful&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;post-creation-session-changes&quot;&gt;Post-creation session changes&lt;/h3&gt;
+
+&lt;p&gt;If you make changes to the session after you’ve already retrieved the session ID from the Intelligence Server, you’ll need to call getSessionID() again.&lt;/p&gt;
+
+&lt;p&gt;The only exceptions are changes to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Session flags&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Regular working set&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Search working set&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you make changes to those, you’ll need to call &lt;a href=&quot;https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/web/objects/WebIServerSession.html#updateSessionParameters()&quot;&gt;updateSessionParamters()&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;permissions-needed&quot;&gt;&lt;a href=&quot;permissions-needed&quot;&gt;Permissions needed&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;This section will hold the permissions or privileges the user needs for some of the functions contained within this guide. You can think of it as a cheatsheet. I will try and include this section in every SDK post.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Creating a session
+    &lt;ul&gt;
+      &lt;li&gt;connecting to server - must have “Connect” permissions in the Intelligence Server’s server definition&lt;/li&gt;
+      &lt;li&gt;connecting to project - must be given project access from a security filter (either directly or through group membership). No privileges are needed in that security filter, however&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Modifying trust tokens
+    &lt;ul&gt;
+      &lt;li&gt;must have “Configuration” permissions in the Intelligence Server’s server definition&lt;/li&gt;
+      &lt;li&gt;must have the “Configure Security Settings” privilege applied directly to the user or user’s group (not in a security role)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can find the Intelligence Server’s server definition permissions in MicroStrategy Developer by logging into the Intelligence Server, going into the Intelligence Server configuration, and clicking the “Modify…” button next to “Set Configuration object properties”. In the box that pops up, click Security to add or remove groups and users.&lt;/p&gt;
+
+&lt;p&gt;For more info, check out the &lt;a href=&quot;https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/web/objects/WebIServerSession.html&quot;&gt;Web API reference for WebIServerSession&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="sdk" /><summary type="html">Connecting to the Intelligence Server is one of the easier and well-documented subjects surrounding the Web SDK. However, I don’t think other sources go into enough detail about the differences between authentication types and other options available. In a first post of many in this “MicroStrategy Web SDK” series, I go into what I think you should know when using sessions.</summary></entry><entry><title type="html">Introduction to the MicroStrategy SDK</title><link href="https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk/" rel="alternate" type="text/html" title="Introduction to the MicroStrategy SDK" /><published>2017-06-23T17:00:00+00:00</published><updated>2017-06-23T17:00:00+00:00</updated><id>https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk</id><content type="html" xml:base="https://managingmicrostrategy.com/introduction-to-the-microstrategy-sdk/">&lt;p&gt;In this blog, I’ll be covering some topics that use the MicroStrategy SDK. Before I jump into those topics, though, I want to write a post on the SDK itself.&lt;/p&gt;
 
 &lt;h2 id=&quot;what-is-the-microstrategy-sdk&quot;&gt;What is the MicroStrategy SDK?&lt;/h2&gt;
 
